@@ -25,12 +25,12 @@ if [[ ${product[0]} -lt 10 ]]; then
 fi
 
 printf "Patching 32-bit ROM...\n"
-cp -v /Applications/VMware\ Fusion.app/Contents/Library/roms/EFI32.ROM .
+cp -v /Applications/VMware\ Fusion.app/Contents/Library/roms/x86_x64/EFI32.ROM .
 ./macos/UEFIPatch EFI32.ROM patches.txt -o EFI32-MACOS.ROM
 rm -fv EFI32.ROM
 
 printf "\nPatching 64-bit ROM...\n"
-cp -v /Applications/VMware\ Fusion.app/Contents/Library/roms//EFI64.ROM .
+cp -v /Applications/VMware\ Fusion.app/Contents/Library/roms/x86_x64/EFI64.ROM .
 ./macos/UEFIPatch EFI64.ROM patches.txt -o EFI64-MACOS.ROM
 rm -fv EFI64.ROM
 
