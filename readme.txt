@@ -1,4 +1,4 @@
-macOS EFI Unlocker V1.0 for VMware
+macOS EFI Unlocker V1.1 for VMware
 ==================================
 
 1. Introduction
@@ -14,8 +14,8 @@ do not need the modified firmware due to Apple removing the restrictions imposed
 
 EFI Unlocker 1 is designed for the following products:
 
-* VMware Workstation and Player versions 14/15
-* VMware Fusion versions 10/11
+* VMware Workstation and Player versions 14-17
+* VMware Fusion versions 10-13
 
 The checks for the server versions are done in VMware's virtual EFI firmware and looks for a file called
 ServerVersion.plist in the installation media and the installed OS. The patch modifies the firmware to check
@@ -35,7 +35,9 @@ macOS open a terminal session and run: efi-macos.sh
 The patched firmware files will be found in the same folder as the tool and are called:
 
 EFI32-MACOS.ROM - 32-bit firmware
+EFI20-32-MACOS.ROM - 32-bit firmware with TPM 2.0 support
 EFI64-MACOS.ROM - 64-bit firmware
+EFI20-64-MACOS.ROM - 64-bit firmware with TPM 2.0 support
 
 3. Using the firmware
 ------------------------
@@ -44,10 +46,12 @@ There are 3 preferred ways to use the firmware, by VM, by user or by host system
 entries dependign on whether you are installing a 32 or 64-bit version of 10.5 or 10.6 as a guest.
 
 32-bit:
-efi32.filename = "filename"
+efi32.filename = "EFI32-MACOS.ROM"
+efi20-32.filename = "EFI20-32-MACOS.ROM"
 
 64-bit:
-efi64.filename = "filename"
+efi64.filename = "EFI64-MACOS.ROM"
+efi20-64.filename = "EFI20-64-MACOS.ROM"
 
 You can add both and the correct one will be used based on the the guestos setting. You will need to put the full
 filename for the patched files into the double quotes.
@@ -58,7 +62,7 @@ Per VM:
 Open the vmx file for the guest and add the relevant lines from above.
 
 Per User:
-Add the 2 lines to the user defaults file which can be found in the following paths.
+Add the 4 lines to the user defaults file which can be found in the following paths.
 Windows: %APPDATA%\VMware\config.ini
 Linux: ~/.vmware/config
 macOS: ~/Library/Preferences/VMware Fusion/config
@@ -78,5 +82,5 @@ https://github.com/LongSoft/UEFITool
 History
 -------
 22/10/18 1.0.0 - First release
-
+24/06/09 1.1.0 - Workstation 17/Fusion 13 support
 (c) 2018 Dave Parsons
