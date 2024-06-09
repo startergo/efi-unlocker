@@ -42,7 +42,20 @@ echo Patching 64-bit ROM...
 xcopy /F /Y "%InstallPath%x64\EFI64.ROM" .
 .\windows\UEFIPatch.exe EFI64.ROM patches.txt -o EFI64-MACOS.ROM
 del /f EFI64.ROM
+:: Check version is 17+
+if %Major% geq 17 (
+    echo.
+    echo Patching 32-bit TPM 2.0 ROM...
+    xcopy /F /Y "%InstallPath%x64\EFI20-32.ROM" .
+    .\windows\UEFIPatch.exe EFI20-32.ROM patches.txt -o EFI20-32-MACOS.ROM
+    del /f EFI20-32.ROM
 
+    echo.
+    echo Patching 64-bit TPM 2.0 ROM...
+    xcopy /F /Y "%InstallPath%x64\EFI20-64.ROM" .
+    .\windows\UEFIPatch.exe EFI20-64.ROM patches.txt -o EFI20-64-MACOS.ROM
+    del /f EFI20-64.ROM
+)
 popd
 echo.
 echo Finished
